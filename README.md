@@ -8,7 +8,6 @@ Which allows them to pick their next read.
 
 <img align="center" src="https://github.com/CPAD2021SecB/Group10/raw/main/Breview_icon.png?raw=true" alt="Breview Logo"  >
 
-
 ### Team Members:
 
 | Name |	Student ID | Email ID | GitHub ID|
