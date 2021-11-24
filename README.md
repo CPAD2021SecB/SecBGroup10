@@ -1,6 +1,6 @@
 # Group10
 
-CPAD Assignment Repository - Group 10
+CPAD Assignment Repository - Group 10 -
 
 ## BREVIEW App
 Breview allows people to share their thoughts about their recent reads. Also helps users to find what their friends are reading, and their review about the picks.
