@@ -1,4 +1,5 @@
 // import 'package:breview/models/Blog.dart';
+import 'package:breview/models/Blog.dart';
 import 'package:breview/util/Constants.dart';
 import 'package:breview/widgets/BlogsWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,8 +7,9 @@ import 'package:flutter/material.dart';
 
 class BlogsProfileWidget extends StatelessWidget {
   final String profilePictureUrl, username, image, likes;
+  Blog blog;
 
-  const BlogsProfileWidget({
+  BlogsProfileWidget({
     Key key,
     @required this.profilePictureUrl,
     @required this.username,
@@ -15,8 +17,11 @@ class BlogsProfileWidget extends StatelessWidget {
     @required this.likes,
   }) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context) {
+    blog = new Blog(username,profilePictureUrl,12,true,Constants.lorem_ipsum,image);
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
       child: Container(
@@ -86,8 +91,7 @@ class BlogsProfileWidget extends StatelessWidget {
               ),
             ),
             BlogsWidget(
-                image: this.image,
-                likes: this.likes
+               blog: blog,
             ),
           ],
         ),

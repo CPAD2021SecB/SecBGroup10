@@ -119,46 +119,27 @@ class _BlogsPageState extends State<BlogsPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  StreamBuilder(
-                      stream: stream,
-                      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                        if (snapshot.hasData) {
-                          print(snapshot.data.data);
-                          results = snapshot.data.data;
-                          print(results["image"]);
-                        } else if (snapshot.hasError) {
+            StreamBuilder(
+              stream: stream,
+              builder: (context, AsyncSnapshot<DocumentSnapshot> snap) {
+                results = snap.data.data;
+                print(results);
+                return Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      BlogsProfileWidget(profilePictureUrl:
+                      results["ProfilePictureUrl"],
+                        image: results["image"],
+                        likes: results["likes"],
+                        username: "Test",
 
-                        }
-                        return ListView.builder(
-                            itemCount: 1,
-                            itemBuilder: (context, index) {
-                              return BlogsProfileWidget(
-                                  profilePictureUrl:results['ProfilePictureUrl'],
-                                  username: results['username'],
-                                  image: results['image'],
-                                  likes: results['likes']
-                                      .toString());
-                            });
-                      }),
-                  // BlogsProfileWidget(
-                  //     profilePictureUrl: this.blogsStream.data.documents[0].data['ProfilePictureUrl'],
-                  //     username: this.blogsStream.documents[0].data['username'],
-                  //     image: this.blogsStream.documents[0].data['image'],
-                  //     likes: this.blogsStream.documents[0].data['likes'].toString()
-                  // ),
-                  // BlogsProfileWidget(
-                  //     profilePictureUrl: this.blogSnapshot.documents[0].data['ProfilePictureUrl'],
-                  //     username: this.blogSnapshot.documents[0].data['username'],
-                  //     image: this.blogSnapshot.documents[0].data['image'],
-                  //     likes: this.blogSnapshot.documents[0].data['likes'].toString()
-                  // )
-                ],
-              ),
+                      )
+                    ],
+                  ),
+                );
+              },
             )
           ],
         ),

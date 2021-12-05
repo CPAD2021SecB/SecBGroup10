@@ -1,15 +1,13 @@
-// import 'package:breview/models/Blog.dart';
+import 'package:breview/models/Blog.dart';
 import 'package:breview/util/Constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class BlogsWidget extends StatelessWidget {
-  final String image, likes;
+  final Blog blog;
 
   const BlogsWidget({
     Key key,
-    @required this.image,
-    @required this.likes,
+    @required this.blog
   }) : super(key: key);
 
   @override
@@ -29,7 +27,7 @@ class BlogsWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
-                    image,
+                    this.blog.image,
                     width: 100,
                     height: 200,
                     fit: BoxFit.cover,
@@ -58,7 +56,7 @@ class BlogsWidget extends StatelessWidget {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                               child: Text(
-                                likes,
+                                this.blog.likes.toString(),
                                 style: TextStyle(
                                   fontFamily: 'Lexend Deca',
                                   color: Color(0xFF8B97A2),

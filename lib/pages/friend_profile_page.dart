@@ -132,10 +132,10 @@ class _FriendProfileState extends State<FriendProfile> {
                         return ListView.builder(
                             itemCount: snapshot.data.documents.length,
                             itemBuilder: (context, index){
-                              return BlogsWidget(
-                                  image: snapshot.data.documents[0].data['image'],
-                                  likes: snapshot.data.documents[0].data['likes'].toString()
-                              );
+                              // return BlogsWidget(
+                              //     image: snapshot.data.documents[0].data['image'],
+                              //     likes: snapshot.data.documents[0].data['likes'].toString()
+                              // );
                             });
                       })
                   // BlogsWidget(
@@ -182,10 +182,10 @@ class _FriendProfileState extends State<FriendProfile> {
                         return ListView.builder(
                             itemCount: snapshot.data.documents.length,
                             itemBuilder: (context, index){
-                              return BlogsWidget(
-                                  image: snapshot.data.documents[0].data['image'],
-                                  likes: snapshot.data.documents[0].data['likes'].toString()
-                              );
+                              // return BlogsWidget(
+                              //     image: snapshot.data.documents[0].data['image'],
+                              //     likes: snapshot.data.documents[0].data['likes'].toString()
+                              // );
                             });
                       })
                   // BlogsWidget(
