@@ -4,7 +4,6 @@ import 'package:breview/widgets/BlogsProfileWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 class BlogsPage extends StatefulWidget {
   BlogsPage({Key key}) : super(key: key);
 
@@ -18,13 +17,16 @@ class _BlogsPageState extends State<BlogsPage> {
   Stream blogsStream;
   CrudMethods crudMethods = new CrudMethods();
 
+  Stream<DocumentSnapshot> stream = Firestore.instance.collection("blogs")
+      .document("BJCHiT1YNwJbyU3Y4tHJ")
+      .snapshots();
+
+  var results;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    crudMethods.getData().then((result){
-      blogsStream = result;
-    });
   }
 
   @override
@@ -33,9 +35,7 @@ class _BlogsPageState extends State<BlogsPage> {
       key: scaffoldKey,
       backgroundColor: Colors.black,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('FloatingActionButton pressed ...');
-        },
+        onPressed: () {},
         backgroundColor: Constants.SECONDARY_COLOR,
         elevation: 8,
         child: Icon(
@@ -49,7 +49,10 @@ class _BlogsPageState extends State<BlogsPage> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Container(
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               decoration: BoxDecoration(
                 color: Colors.black,
                 boxShadow: [
@@ -116,24 +119,31 @@ class _BlogsPageState extends State<BlogsPage> {
                 ),
               ),
             ),
-            blogsStream != null ? Padding(
+            Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   StreamBuilder(
-                    stream: blogsStream,
-                    builder: (context, snapshot){
-                      return ListView.builder(
-                          itemCount: snapshot.data.documents.length,
-                          itemBuilder: (context, index){
-                            return BlogsProfileWidget(
-                                profilePictureUrl: snapshot.data.documents[index].data['ProfilePictureUrl'],
-                                username: snapshot.data.documents[0].data['username'],
-                                image: snapshot.data.documents[0].data['image'],
-                                likes: snapshot.data.documents[0].data['likes'].toString()
-                            );
-                          });
+                      stream: stream,
+                      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot.data.data);
+                          results = snapshot.data.data;
+                          print(results["image"]);
+                        } else if (snapshot.hasError) {
+
+                        }
+                        return ListView.builder(
+                            itemCount: 1,
+                            itemBuilder: (context, index) {
+                              return BlogsProfileWidget(
+                                  profilePictureUrl:results['ProfilePictureUrl'],
+                                  username: results['username'],
+                                  image: results['image'],
+                                  likes: results['likes']
+                                      .toString());
+                            });
                       }),
                   // BlogsProfileWidget(
                   //     profilePictureUrl: this.blogsStream.data.documents[0].data['ProfilePictureUrl'],
@@ -149,9 +159,6 @@ class _BlogsPageState extends State<BlogsPage> {
                   // )
                 ],
               ),
-            ):Container(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(),
             )
           ],
         ),
