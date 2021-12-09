@@ -90,8 +90,8 @@ class _CreateBlogState extends State<CreateBlog> {
                             ),
                             UserDetailsInputText(
                               textEditingController: lastNameController,
-                              labelText: "Caption",
-                              hintText: "Caption (Details)",
+                              labelText: "Review",
+                              hintText: "Review comments",
                             ),
                             SizedBox(
                               width: double.infinity,
