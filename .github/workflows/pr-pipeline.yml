@@ -15,10 +15,6 @@ jobs:
         with:
           channel: stable
 
-      - run: |
-         cd breview
-         flutter pub get
-      - run: |
-         cd breview
-         flutter analyze .
+      - run: flutter pub get
+      - run: flutter analyze .
 #      - run: flutter test
