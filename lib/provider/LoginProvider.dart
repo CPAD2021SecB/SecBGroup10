@@ -24,7 +24,7 @@ class LoginProvider {
   static StreamController<PhoneAuthState> phoneAuthState;
   static Stream stateStream;
 
-  static void AuthStateChanged(User user) {
+  static void authStateChanged(User user) {
     if (user == null) {
       addStatus("Not Logged In");
       addState(PhoneAuthState.Failed);
@@ -41,7 +41,7 @@ class LoginProvider {
 
   static instantiate() async {
     firebaseAuth = FirebaseAuth.instance;
-    firebaseAuth.authStateChanges().listen(AuthStateChanged);
+    firebaseAuth.authStateChanges().listen(authStateChanged);
     statusStream = StreamController();
     phoneAuthState = StreamController(sync: true);
     stateStream = phoneAuthState.stream.asBroadcastStream(); //not understood

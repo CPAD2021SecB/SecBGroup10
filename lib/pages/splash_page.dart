@@ -36,23 +36,14 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Align(
               alignment: Alignment.center,
               child: Container(
+                height: 200,
+                width: 200,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "assets/images/splash.png",
+                      "assets/images/splash.jpg",
                       fit: BoxFit.scaleDown,
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Breview",
-                      style: TextStyle(
-                          fontSize: 40,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w600,
-                          color: Colors.amber[800]),
                     ),
                   ],
                 ),
@@ -60,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void checkLoginStatus(BuildContext Navcontext) {
+  void checkLoginStatus(BuildContext navcontext) {
     _streamSubscription = LoginProvider.stateStream.listen((state) {
       if (state == PhoneAuthState.Failed || state == PhoneAuthState.newUser) {
         Future.delayed(Duration(seconds: 1), () {
@@ -70,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
       if (state == PhoneAuthState.Verified) {
         Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(Navcontext).pushReplacement(FadeRoute(page: HomePage()));
+          Navigator.of(navcontext).pushReplacement(FadeRoute(page: HomePage()));
         });
       }
     });
