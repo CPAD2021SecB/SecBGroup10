@@ -19,7 +19,7 @@ jobs:
         run: |
          cd breview
          flutter pub get
-      - - name: analyze
+      - name: analyze
         run: |
          cd breview
          flutter analyze .
