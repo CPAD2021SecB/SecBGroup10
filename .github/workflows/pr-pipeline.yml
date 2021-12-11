@@ -14,11 +14,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: stable
-
-      - run: 
+      - name: pub get
+        run: |
          cd breview
          flutter pub get
-      - run: 
+      - name: analyze
+        run: 
          cd breview
          flutter analyze .
 #      - run: flutter test
