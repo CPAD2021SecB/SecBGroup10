@@ -4,7 +4,9 @@ import 'package:breview/pages/home_page.dart';
 import 'package:breview/pages/login_page.dart';
 import 'package:breview/provider/LoginProvider.dart';
 import 'package:breview/util/RouteAnimation.dart';
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_web_frame/flutter_web_frame.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -29,25 +31,32 @@ class _SplashScreenState extends State<SplashScreen> {
       checkLoginStatus(_scaffoldKey.currentContext);
     });
 
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Colors.black,
-      body: SafeArea(
-          child: Align(
-              alignment: Alignment.center,
-              child: Container(
-                height: 200,
-                width: 200,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/splash.jpg",
-                      fit: BoxFit.scaleDown,
+    return FlutterWebFrame(
+      builder: (context) {
+        return Scaffold(
+          key: _scaffoldKey,
+          backgroundColor: Colors.black,
+          body: SafeArea(
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/splash.jpg",
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ))),
+                  ))),
+        );
+      },
+      maximumSize: Size(750, double.infinity),
+      enabled: kIsWeb && MediaQuery.of(context).size.width > 700,
+      backgroundColor: Colors.black,
     );
   }
 
