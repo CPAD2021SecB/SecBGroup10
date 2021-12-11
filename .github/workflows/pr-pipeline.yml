@@ -19,7 +19,7 @@ jobs:
          cd breview
          flutter pub get
       - name: analyze
-        run: 
+        run: |
          cd breview
          flutter analyze .
 #      - run: flutter test
