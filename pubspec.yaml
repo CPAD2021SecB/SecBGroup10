@@ -15,6 +15,7 @@ dependencies:
   firebase_storage: ^10.2.3
   firebase_auth: ^3.3.3
   cupertino_icons: ^1.0.4
+  pinput: ^1.2.2
 
 dev_dependencies:
   flutter_test:
