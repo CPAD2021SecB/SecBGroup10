@@ -40,7 +40,7 @@ class LoginProvider {
   }
 
   static instantiate() async {
-    firebaseAuth = await FirebaseAuth.instance;
+    firebaseAuth = FirebaseAuth.instance;
     firebaseAuth.authStateChanges().listen(AuthStateChanged);
     statusStream = StreamController();
     phoneAuthState = StreamController(sync: true);

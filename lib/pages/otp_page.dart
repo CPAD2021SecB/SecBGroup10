@@ -14,10 +14,8 @@ class OTPPageWidget extends StatefulWidget {
 }
 
 class _OTPPageWidgetState extends State<OTPPageWidget> {
-  bool _visibility = true;
   String otp;
 
-  final _globalKey = GlobalKey();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -230,9 +228,6 @@ class _OTPPageWidgetState extends State<OTPPageWidget> {
   }
 
   otpSubmit(String otp) {
-    setState(() {
-      _visibility = false;
-    });
     LoginProvider.signInWithPhoneNumber(otp);
   }
 }

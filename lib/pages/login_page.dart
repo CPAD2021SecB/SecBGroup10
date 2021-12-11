@@ -15,7 +15,7 @@ class _PhoneloginWidgetState extends State<PhoneloginWidget> {
   final _formKey = GlobalKey<FormState>();
 
   final _focusNode = FocusNode();
-  bool _visibility = true;
+
   var provider;
   String phone;
 
@@ -88,31 +88,6 @@ class _PhoneloginWidgetState extends State<PhoneloginWidget> {
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
-                              child: Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF191817),
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Color(0xFFDBE2E7),
-                                  ),
-                                ),
-                                child: InkWell(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Icon(
-                                    Icons.arrow_back_rounded,
-                                    color: Colors.white,
-                                    size: 24,
-                                  ),
-                                ),
-                              ),
-                            ),
                             Expanded(
                               child: Text(
                                 'Sign In',
@@ -139,15 +114,6 @@ class _PhoneloginWidgetState extends State<PhoneloginWidget> {
                                 child: TextFormField(
                                   onChanged: (value) {
                                     phone = value;
-                                  },
-                                  onFieldSubmitted: (value) {
-                                    if (_formKey.currentState.validate()) {
-                                      setState(() {
-                                        _visibility = false;
-                                      });
-                                      // startPhoneAuth(phone, context);
-                                      print("Next");
-                                    }
                                   },
                                   focusNode: _focusNode,
                                   validator: (value) {
@@ -203,9 +169,6 @@ class _PhoneloginWidgetState extends State<PhoneloginWidget> {
                             ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState.validate()) {
-                                  setState(() {
-                                    _visibility = false;
-                                  });
                                   startPhoneAuth(phone, context);
                                   print("Next");
                                 }
