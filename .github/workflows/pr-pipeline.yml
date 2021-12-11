@@ -15,10 +15,10 @@ jobs:
         with:
           channel: stable
 
-      - run: 
+      - run: |
          cd breview
          flutter pub get
-      - run: 
+      - run: |
          cd breview
          flutter analyze .
 #      - run: flutter test
