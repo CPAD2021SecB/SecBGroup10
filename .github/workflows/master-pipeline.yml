@@ -15,14 +15,14 @@ jobs:
         with:
           channel: stable
 
-      - run: 
+      - run: |
          cd breview
          flutter pub get
-      - run: 
+      - run: |
          cd breview
          flutter analyze .
 #      - run: flutter test
-      - run: 
+      - run: |
          cd breview
          flutter build apk
       - uses: actions/upload-artifact@v1
