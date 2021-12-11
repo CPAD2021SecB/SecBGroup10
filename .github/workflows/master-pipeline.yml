@@ -32,3 +32,15 @@ jobs:
         with:
           name: release-apk
           path: breview/build/app/outputs/apk/release/app-release.apk
+      
+      # Setup web 
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: install libraries
+        run: |
+          npm install
+          npm i firebase-tools -g
+      - name: deploy
+        run: firebase deploy --token ${{secrets.FIRE_TOKEN}}
