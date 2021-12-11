@@ -1,6 +1,4 @@
 import 'package:breview/pages/home_page.dart';
-import 'package:breview/pages/otp_page.dart';
-import 'package:breview/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
