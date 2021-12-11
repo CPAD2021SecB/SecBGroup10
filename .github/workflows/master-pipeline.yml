@@ -42,5 +42,11 @@ jobs:
         run: |
           npm install
           npm i firebase-tools -g
+          
+      - name: build web
+        run: |
+          cd breview
+          flutter build web  
+          
       - name: deploy
         run: firebase deploy --token ${{secrets.FIRE_TOKEN}}
