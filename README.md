@@ -4,7 +4,7 @@ CPAD Assignment Repository - Group 10
 
 ## BREVIEW App
 Breview allows people to share their thoughts about their recent reads. Also helps users to find what their friends are reading, and their review about the picks.
-Which allows them to pick their next read.
+Which allows them to pick their next read.xx
 
 <img align="center" src="https://github.com/CPAD2021SecB/Group10/raw/main/Breview_icon.png?raw=true" alt="Breview Logo"  >
 
