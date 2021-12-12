@@ -14,6 +14,7 @@ class UserDetailsInputText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+          controller: textEditingController,
           style: TextStyle(color: Colors.black),
           decoration: InputDecoration(
             labelStyle: TextStyle(color: Colors.black),

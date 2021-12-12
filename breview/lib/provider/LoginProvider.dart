@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 enum PhoneAuthState {
   Started,
@@ -52,14 +53,18 @@ class LoginProvider {
     statusStream.stream.listen((String status) {
       debugPrint("PhoneAuth: " + status);
     });
-
-    firebaseAuth.verifyPhoneNumber(
-        phoneNumber: phone,
-        timeout: Duration(seconds: 60),
-        verificationCompleted: verificationCompleted,
-        verificationFailed: verificationFailed,
-        codeSent: codeSent,
-        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+    if(!kIsWeb) {
+      firebaseAuth.verifyPhoneNumber(
+          phoneNumber: phone,
+          timeout: Duration(seconds: 60),
+          verificationCompleted: verificationCompleted,
+          verificationFailed: verificationFailed,
+          codeSent: codeSent,
+          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+    }
+    else{
+      firebaseAuth.signInWithPhoneNumber(phone);
+    }
   }
 
   static final PhoneCodeSent codeSent =
@@ -96,7 +101,9 @@ class LoginProvider {
     firebaseAuth.signInWithCredential(auth).then((UserCredential value) {
       if (value.user != null) {
         addStatus(status = 'Authentication successful');
-        //remove this to add new user check and add onAuthChange
+        if(value.additionalUserInfo.isNewUser)
+          addState(PhoneAuthState.newUser);
+        else
         addState(PhoneAuthState.Verified);
       } else {
         addState(PhoneAuthState.Failed);
