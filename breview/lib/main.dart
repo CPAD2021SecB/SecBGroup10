@@ -1,14 +1,11 @@
-import 'package:breview/models/UserDetails.dart';
 import 'package:breview/pages/splash_page.dart';
-import 'package:breview/pages/user_details_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // ignore: null_aware_in_condition
-  if (Firebase.apps?.isEmpty) {
+  if (Firebase.apps.isEmpty) {
     if (kIsWeb)
       await Firebase.initializeApp(
         name: "test",
