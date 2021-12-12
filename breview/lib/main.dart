@@ -1,11 +1,15 @@
-import 'package:breview/pages/home_page.dart';
+import 'package:breview/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      options: FirebaseOptions(
+  if (Firebase.apps.isEmpty) {
+    if (kIsWeb)
+      await Firebase.initializeApp(
+        name: "test",
+          options: FirebaseOptions(
         apiKey: "AIzaSyACUL935VNkFDUp_PpFakoRPxEbGMNuh4s",
         authDomain: "breview-334103.firebaseapp.com",
         projectId: "breview-334103",
@@ -14,6 +18,9 @@ Future<void> main() async {
         appId: "1:934338543057:web:25b0df1edb3072fad4b4f0",
         // measurementId: "${config.measurementId}"
       ));
+    else
+      await Firebase.initializeApp();
+  }
   runApp(MyApp());
 }
 
@@ -26,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }

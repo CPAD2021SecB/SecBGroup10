@@ -1,5 +1,5 @@
-import 'package:breview/pages/home_page.dart';
 import 'package:breview/pages/login_page.dart';
+import 'package:breview/pages/user_details_page.dart';
 import 'package:breview/provider/LoginProvider.dart';
 import 'package:breview/util/RouteAnimation.dart';
 import 'package:flutter/foundation.dart';
@@ -220,12 +220,12 @@ class _OTPPageWidgetState extends State<OTPPageWidget> {
         FocusScope.of(context).unfocus();
         Navigator.of(_scaffoldKey.currentContext)
             .pushReplacement(MaterialPageRoute(builder: (_) {
-          return HomePage();
+          return UserDetailsPage();
         }));
       } else if (state == PhoneAuthState.newUser) {
         print(state);
         Navigator.of(_scaffoldKey.currentContext)
-            .pushReplacement(SlideRightRoute(page: HomePage()));
+            .pushReplacement(SlideRightRoute(page: UserDetailsPage()));
       } else {
         Future.delayed(Duration(seconds: 8), () {
           Navigator.of(_scaffoldKey.currentContext)
