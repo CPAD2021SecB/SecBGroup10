@@ -5,22 +5,20 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Firebase.apps.isEmpty) {
-    if (kIsWeb)
-      await Firebase.initializeApp(
-        name: "test",
-          options: FirebaseOptions(
-        apiKey: "AIzaSyACUL935VNkFDUp_PpFakoRPxEbGMNuh4s",
-        authDomain: "breview-334103.firebaseapp.com",
-        projectId: "breview-334103",
-        storageBucket: "breview-334103.appspot.com",
-        messagingSenderId: "934338543057",
-        appId: "1:934338543057:web:25b0df1edb3072fad4b4f0",
-        // measurementId: "${config.measurementId}"
-      ));
-    else
-      await Firebase.initializeApp();
-  }
+  // ignore: null_aware_in_condition
+  if (kIsWeb)
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+      apiKey: "AIzaSyACUL935VNkFDUp_PpFakoRPxEbGMNuh4s",
+      authDomain: "breview-334103.firebaseapp.com",
+      projectId: "breview-334103",
+      storageBucket: "breview-334103.appspot.com",
+      messagingSenderId: "934338543057",
+      appId: "1:934338543057:web:25b0df1edb3072fad4b4f0",
+      // measurementId: "${config.measurementId}"
+    ));
+  else
+    await Firebase.initializeApp();
   runApp(MyApp());
 }
 

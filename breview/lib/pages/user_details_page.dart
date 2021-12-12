@@ -149,7 +149,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                                                 user.uid,
                                                 firstNameController.text,
                                                 lastNameController.text,
-                                                lastNameController.text,
+                                                emailController.text,
                                                 user.phoneNumber,
                                                 "test");
                                         CrudMethods.saveUserData(
