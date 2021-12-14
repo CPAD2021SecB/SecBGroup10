@@ -1,6 +1,15 @@
+import 'dart:io';
+import 'package:breview/models/Blog.dart';
+import 'package:breview/models/Create_Blog.dart';
+import 'package:breview/pages/blogs_page.dart';
+import 'package:breview/services/crud.dart';
 import 'package:breview/widgets/FilledButton.dart';
 import 'package:breview/widgets/UserDetailstInputText.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_web_frame/flutter_web_frame.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateBlog extends StatefulWidget {
   CreateBlog({Key key}) : super(key: key);
@@ -10,103 +19,172 @@ class CreateBlog extends StatefulWidget {
 }
 
 class _CreateBlogState extends State<CreateBlog> {
+  XFile _image;
+  final ImagePicker _picker = ImagePicker();
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController firstNameController;
-  TextEditingController lastNameController;
-  TextEditingController emailController;
+  TextEditingController ReviewTextController;
 
   @override
   void initState() {
     super.initState();
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    emailController = TextEditingController();
+    ReviewTextController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: formKey,
-        child: Scaffold(
-            key: scaffoldKey,
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  // Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back),
-              ),
-              backgroundColor: Colors.black,
-              automaticallyImplyLeading: true,
-              title: Text('Post something New'),
-              actions: [],
-              centerTitle: true,
-              elevation: 0,
-            ),
-            body: SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                                width: 100,
-                                height: 100,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    // image: DecorationImage(
-                                    //     fit: BoxFit.scaleDown,
-                                    //     //     //     image: Image.asset(
-                                    //     //     //       'assets/images/profile_image.png',
-                                    //     //     //     ).image,
-                                    //     alignment: Alignment.topCenter),
-                                    )),
-                            Container(
-                              margin: EdgeInsets.symmetric(horizontal: 15),
-                              height: 200,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(6)),
-                              width: MediaQuery.of(context).size.width,
-                              child: Icon(
-                                Icons.add_a_photo,
-                                color: Colors.black45,
-                              ),
-                            ),
-                            UserDetailsInputText(
-                              textEditingController: firstNameController,
-                              labelText: "Blog Title",
-                              hintText: "Blog Title",
-                            ),
-                            UserDetailsInputText(
-                              textEditingController: lastNameController,
-                              labelText: "Caption",
-                              hintText: "Caption (Details)",
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 8,
-                            ),
-                            FilledButton(
-                              listener: () {
-                                if (formKey.currentState.validate()) {}
-                                print(lastNameController.text);
-                                print("Posted");
-                              },
-                              text: "Post",
-                            )
-                          ]),
+    return FlutterWebFrame(
+        maximumSize: Size(750, double.infinity),
+        enabled: kIsWeb && MediaQuery.of(context).size.width > 700,
+        backgroundColor: Colors.black,
+        builder: (context) {
+          return Form(
+              key: formKey,
+              child: Scaffold(
+                  key: scaffoldKey,
+                  appBar: AppBar(
+                    leading: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back),
                     ),
-                  )),
-            )));
+                    backgroundColor: Colors.black,
+                    automaticallyImplyLeading: true,
+                    title: Text('Post something New'),
+                    actions: [],
+                    centerTitle: true,
+                    elevation: 0,
+                  ),
+                  body: SizedBox(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: Container(
+                        color: Colors.white,
+                        width: double.infinity,
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      width: 100,
+                                      height: 100,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration()),
+                                  Container(
+                                      height: 200,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey,
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          _showPicker(context);
+                                        },
+                                        child: _image != null
+                                            ? ClipRRect(
+                                                child: Image.file(
+                                                  File(_image.path),
+                                                  height: 200,
+                                                  width: 200,
+                                                ),
+                                              )
+                                            : ClipRRect(
+                                                child: Container(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 16),
+                                                    child: Icon(
+                                                        Icons.file_upload)),
+                                              ),
+                                      )),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                  ),
+                                  UserDetailsInputText(
+                                    textEditingController: ReviewTextController,
+                                    labelText: "Review",
+                                    hintText: "Review comments",
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 8,
+                                  ),
+                                  FilledButton(
+                                    listener: () async {
+                                      if (_image == null) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(
+                                            "Choose a Picture to Post",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                        return;
+                                      }
+                                      if (formKey.currentState.validate()) {
+                                        print(ReviewTextController.text);
+                                        User user = await FirebaseAuth
+                                            .instance.currentUser;
+                                        BlogDetails blogDetails =
+                                            new BlogDetails(
+                                                user.uid,
+                                                ReviewTextController.text,
+                                                "test");
+                                        CrudMethods.saveBlogData(
+                                            File(_image.path), blogDetails);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BlogsPage()),
+                                        );
+                                      }
+                                    },
+                                    text: "Post",
+                                  )
+                                ]),
+                          ),
+                        )),
+                  )));
+        });
+  }
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Gallery'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  _imgFromGallery() async {
+    XFile image =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    setState(() {
+      _image = image;
+    });
   }
 }
