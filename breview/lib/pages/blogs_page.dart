@@ -1,7 +1,9 @@
 import 'package:breview/services/crud.dart';
 import 'package:breview/util/Constants.dart';
 import 'package:breview/widgets/BlogsProfileWidget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class BlogsPage extends StatefulWidget {
   BlogsPage({Key key}) : super(key: key);
@@ -14,6 +16,15 @@ class _BlogsPageState extends State<BlogsPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   CrudMethods crudMethods = new CrudMethods();
+  final firestore = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<String> getUserName() async {
+    final CollectionReference users = firestore.collection('UserNames');
+    final String uid = auth.currentUser.uid;
+    final result = await users.doc(uid).get();
+    return result.doc.data()['displayName'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +78,26 @@ class _BlogsPageState extends State<BlogsPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                            child: Text(
-                              'Abin',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
+                          FutureBuilder(
+                            future: getUserName(),
+                            builder: (_ , AsyncSnapshot<String> snapshot){
+
+                              if(snapshot.connectionState == ConnectionState.waiting){
+                                return Center( child: CircularProgressIndicator());
+                              }
+                              return Text(snapshot.data);
+                            },
+                          ),
+                          // Padding(
+                          //   padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                          //   child: Text(
+                          //     "Abin",
+                          //     style: TextStyle(
+                          //       fontFamily: 'Poppins',
+                          //       fontWeight: FontWeight.bold,
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                     ),
