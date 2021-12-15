@@ -2,8 +2,8 @@ import 'package:breview/services/crud.dart';
 import 'package:breview/util/Constants.dart';
 import 'package:breview/widgets/BlogsProfileWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class BlogsPage extends StatefulWidget {
   BlogsPage({Key key}) : super(key: key);
@@ -14,20 +14,30 @@ class BlogsPage extends StatefulWidget {
 
 class _BlogsPageState extends State<BlogsPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String userName = "";
 
   CrudMethods crudMethods = new CrudMethods();
   final firestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<String> getUserName() async {
-    final CollectionReference users = firestore.collection('UserNames');
+  getUserName() async {
+    String name = "";
     final String uid = auth.currentUser.uid;
-    final result = await users.doc(uid).get();
-    return result.doc.data()['displayName'];
+    print(uid);
+    await firestore
+        .collection('users')
+        .where("user_id", isEqualTo: uid)
+        .limit(1)
+        .get()
+        .then((value) => name = value.docs.first.get("first_name"));
+    setState(() {
+      userName = name;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    getUserName();
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.black,
@@ -78,16 +88,7 @@ class _BlogsPageState extends State<BlogsPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          FutureBuilder(
-                            future: getUserName(),
-                            builder: (_ , AsyncSnapshot<String> snapshot){
-
-                              if(snapshot.connectionState == ConnectionState.waiting){
-                                return Center( child: CircularProgressIndicator());
-                              }
-                              return Text(snapshot.data);
-                            },
-                          ),
+                          Text(userName),
                           // Padding(
                           //   padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                           //   child: Text(
