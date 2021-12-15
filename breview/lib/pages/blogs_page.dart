@@ -1,10 +1,7 @@
-import 'package:breview/pages/create_blog_ui.dart';
 import 'package:breview/services/crud.dart';
 import 'package:breview/util/Constants.dart';
 import 'package:breview/widgets/BlogsProfileWidget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 class BlogsPage extends StatefulWidget {
   BlogsPage({Key key}) : super(key: key);
@@ -25,8 +22,6 @@ class _BlogsPageState extends State<BlogsPage> {
       backgroundColor: Colors.black,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => CreateBlog()));
           print('FloatingActionButton pressed ...');
         },
         backgroundColor: Constants.SECONDARY_COLOR,
