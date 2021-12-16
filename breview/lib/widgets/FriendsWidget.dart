@@ -1,4 +1,4 @@
-import 'package:breview/pages/blogs_page.dart';
+import 'package:breview/pages/friend_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:breview/models/Friends.dart';
 class FriendsWidget extends StatelessWidget {
@@ -42,7 +42,7 @@ class FriendsWidget extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  BlogsPage()),
+                    MaterialPageRoute(builder: (context) =>  FriendProfile()),
                   );
                 },
               ),

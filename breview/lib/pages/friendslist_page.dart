@@ -1,5 +1,6 @@
 import 'package:breview/widgets/FriendListWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:breview/pages/friend_profile_page.dart';
 import 'package:breview/widgets/FriendsWidget.dart';
 import 'package:breview/util/Constants.dart';
 import 'package:breview/services/crud.dart';
@@ -172,6 +173,7 @@ class _FriendsListState extends State<FriendsList> {
           Expanded(
             flex: 10,
             child: SingleChildScrollView(
+              physics: ScrollPhysics(),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -179,7 +181,7 @@ class _FriendsListState extends State<FriendsList> {
                 children: [
                   Padding(
 
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -194,7 +196,7 @@ class _FriendsListState extends State<FriendsList> {
                       future: crudMethods.getData("users"),
                       builder: (context,AsyncSnapshot<dynamic> snap) {
                         return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -202,17 +204,32 @@ class _FriendsListState extends State<FriendsList> {
                                   stream: snap.data,
                                   builder: (context, snapshot){
                                     if(snapshot.hasData){
-                                      return ListView.builder(
-                                          scrollDirection: Axis.vertical,
-                                          shrinkWrap: true,
-                                          itemCount: snapshot.data.docs.length,
-                                          itemBuilder: (context, index){
-                                            return FriendListWidget(
-                                                firstName: snapshot.data.docs[index]['first_name'],
-                                                lastName: snapshot.data.docs[index]['last_name'],
-                                                profilePicture: snapshot.data.docs[index]['profile_picture']
+                                      return Scrollbar(
+                                        isAlwaysShown: true,
+                                        showTrackOnHover: true,
+                                        child: ListView.builder(
+                                            scrollDirection: Axis.vertical,
+                                            shrinkWrap: true,
+                                            physics: NeverScrollableScrollPhysics(),
+                                            itemCount: snapshot.data.docs.length,
+                                            itemBuilder: (context, index){
+                                              return
+                                             GestureDetector(
+                                               onTap: (){
+
+                                                 Navigator.push(
+                                                   context,
+                                                   MaterialPageRoute(builder: (context) =>  FriendProfile()),
+                                                 );
+                                               },
+                                               child: FriendListWidget(
+                                                  firstName: snapshot.data.docs[index]['first_name'],
+                                                  lastName: snapshot.data.docs[index]['last_name'],
+                                                  profilePicture: snapshot.data.docs[index]['profile_picture'],
+                                               ),
                                             );
-                                          });
+                                              }),
+                                      );
                                     }
                                     else{
                                       return Container(
