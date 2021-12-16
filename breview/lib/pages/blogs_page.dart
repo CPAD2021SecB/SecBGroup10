@@ -23,7 +23,6 @@ class _BlogsPageState extends State<BlogsPage> {
   getUserName() async {
     String name = "";
     final String uid = auth.currentUser.uid;
-    print(uid);
     await firestore
         .collection('users')
         .where("user_id", isEqualTo: uid)
@@ -88,17 +87,18 @@ class _BlogsPageState extends State<BlogsPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(userName),
-                          // Padding(
-                          //   padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                          //   child: Text(
-                          //     "Abin",
-                          //     style: TextStyle(
-                          //       fontFamily: 'Poppins',
-                          //       fontWeight: FontWeight.bold,
-                          //     ),
-                          //   ),
-                          // )
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                            child: Text(
+                              userName,
+                              style: TextStyle(
+                                fontFamily: 'Lexend Deca',
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
