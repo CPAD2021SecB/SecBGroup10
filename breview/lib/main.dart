@@ -1,4 +1,5 @@
-import 'package:breview/pages/splash_page.dart';
+import 'package:breview/pages/blogs_page.dart';
+// import 'package:breview/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: SplashScreen(),
+      home: BlogsPage(),
     );
   }
 }

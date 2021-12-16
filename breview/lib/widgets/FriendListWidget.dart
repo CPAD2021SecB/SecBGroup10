@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class FriendListWidget extends StatelessWidget {
@@ -20,13 +21,13 @@ class FriendListWidget extends StatelessWidget {
             children: [
               Padding(
                 padding:
-                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                     shape: BoxShape.rectangle,
                     border: Border.all(
                       color: Color(0xFFC8CED5),
