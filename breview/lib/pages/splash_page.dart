@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:breview/pages/google_sign_in_page.dart';
 import 'package:breview/pages/home_page.dart';
 import 'package:breview/pages/login_page.dart';
 import 'package:breview/provider/LoginProvider.dart';
@@ -64,9 +65,14 @@ class _SplashScreenState extends State<SplashScreen> {
     _streamSubscription = LoginProvider.stateStream.listen((state) {
       if (state == PhoneAuthState.Failed || state == PhoneAuthState.newUser) {
         Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(_scaffoldKey.currentContext)
-              .pushReplacement(FadeRoute(page: PhoneloginWidget()));
-        });
+          if(kIsWeb){
+            Navigator.of(_scaffoldKey.currentContext)
+                .pushReplacement(FadeRoute(page: GoogleSignInPage()));
+          }
+          else {
+            Navigator.of(_scaffoldKey.currentContext)
+                .pushReplacement(FadeRoute(page: PhoneloginWidget()));
+          }});
       }
       if (state == PhoneAuthState.Verified) {
         Future.delayed(Duration(seconds: 1), () {
