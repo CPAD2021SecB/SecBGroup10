@@ -145,11 +145,15 @@ class _FriendProfileState extends State<FriendProfile> {
                                                     snapshot.data.docs.length,
                                                 itemBuilder: (context, index) {
                                                   return BlogsWidget(
-                                                      image: snapshot.data
-                                                          .docs[index]['image'],
-                                                      likes: snapshot.data
-                                                          .docs[index]['likes']
-                                                          .toString());
+                                                    image: snapshot.data
+                                                        .docs[index]['image'],
+                                                    likes: snapshot.data
+                                                        .docs[index]['likes']
+                                                        .toString(),
+                                                    blogtext: snapshot
+                                                            .data.docs[index]
+                                                        ['Blog_text'],
+                                                  );
                                                 });
                                           } else {
                                             return Container(

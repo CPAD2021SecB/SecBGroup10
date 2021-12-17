@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import 'package:breview/models/Create_Blog.dart';
-import 'package:breview/pages/blogs_page.dart';
+import 'package:breview/pages/home_page.dart';
 import 'package:breview/services/crud.dart';
 import 'package:breview/widgets/FilledButton.dart';
 import 'package:breview/widgets/UserDetailstInputText.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateBlog extends StatefulWidget {
   CreateBlog({Key key}) : super(key: key);
@@ -149,7 +149,7 @@ class _CreateBlogState extends State<CreateBlog> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  BlogsPage()),
+                                                  HomePage()),
                                         );
                                       }
                                     },

@@ -147,15 +147,18 @@ class _BlogsPageState extends State<BlogsPage> {
                                     itemCount: snapshot.data.docs.length,
                                     itemBuilder: (context, index) {
                                       return BlogsProfileWidget(
-                                          profilePictureUrl: snapshot.data
-                                              .docs[index]['ProfilePictureUrl'],
-                                          username: snapshot.data.docs[index]
-                                              ['username'],
-                                          image: snapshot.data.docs[index]
-                                              ['image'],
-                                          likes: snapshot
-                                              .data.docs[index]['likes']
-                                              .toString());
+                                        profilePictureUrl: snapshot.data
+                                            .docs[index]['ProfilePictureUrl'],
+                                        username: snapshot.data.docs[index]
+                                            ['username'],
+                                        image: snapshot.data.docs[index]
+                                            ['image'],
+                                        likes: snapshot
+                                            .data.docs[index]['likes']
+                                            .toString(),
+                                        blogstext: snapshot.data.docs[index]
+                                            ['Blog_text'],
+                                      );
                                     });
                               } else {
                                 return Container(
