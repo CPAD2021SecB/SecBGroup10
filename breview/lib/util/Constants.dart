@@ -17,7 +17,10 @@ class Constants {
       'https://i.picsum.photos/id/1027/2848/4272.jpg?hmac=EAR-f6uEqI1iZJjB6-NzoZTnmaX0oI0th3z8Y78UpKM';
   static const String test_image =
       'https://d.newsweek.com/en/full/1310267/best-hawaii-beaches.jpg';
-  static Friends testWidget = Friends("Akshay", 'assets/images/Akshay.jpeg');
+  static Friends testWidget1 = Friends("Abin", 'assets/images/profile_image.png');
+  static Friends testWidget2 = Friends("Amit", 'assets/images/Amit.jfif');
+  static Friends testWidget3 = Friends("Akshay", 'assets/images/Akshay.jpeg');
+  static Friends testWidget4 = Friends("Soujanya", 'assets/images/profile_image.png');
   // Strings
   static const String WELCOME = "Welcome";
   static const String LATEST_PICKS = "Latest picks";

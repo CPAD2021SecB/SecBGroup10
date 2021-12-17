@@ -185,10 +185,10 @@ class _FriendsListState extends State<FriendsList> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        FriendsWidget(addFriends: Constants.testWidget),
-                        FriendsWidget(addFriends: Constants.testWidget),
-                        FriendsWidget(addFriends: Constants.testWidget),
-                        FriendsWidget(addFriends: Constants.testWidget),
+                        FriendsWidget(addFriends: Constants.testWidget1),
+                        FriendsWidget(addFriends: Constants.testWidget2),
+                        FriendsWidget(addFriends: Constants.testWidget3),
+                        FriendsWidget(addFriends: Constants.testWidget4),
                       ],
                     ),
                   ),
