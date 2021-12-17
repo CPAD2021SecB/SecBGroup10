@@ -2,12 +2,13 @@ import 'package:breview/util/Constants.dart';
 import 'package:flutter/material.dart';
 
 class BlogsWidget extends StatelessWidget {
-  final String image, likes;
+  final String image, likes,blogtext;
 
   const BlogsWidget({
     Key key,
     @required this.image,
     @required this.likes,
+    @required this.blogtext
   }) : super(key: key);
 
   @override
@@ -80,7 +81,7 @@ class BlogsWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      Constants.lorem_ipsum,
+                      this.blogtext,
                       style: TextStyle(
                         fontFamily: 'Lexend Deca',
                         color: Colors.white,

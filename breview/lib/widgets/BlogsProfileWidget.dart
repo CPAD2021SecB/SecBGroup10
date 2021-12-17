@@ -3,7 +3,7 @@ import 'package:breview/widgets/BlogsWidget.dart';
 import 'package:flutter/material.dart';
 
 class BlogsProfileWidget extends StatelessWidget {
-  final String profilePictureUrl, username, image, likes;
+  final String profilePictureUrl, username, image, likes,blogstext;
 
   const BlogsProfileWidget({
     Key key,
@@ -11,6 +11,7 @@ class BlogsProfileWidget extends StatelessWidget {
     @required this.username,
     @required this.image,
     @required this.likes,
+    @required this.blogstext
   }) : super(key: key);
 
   @override
@@ -85,7 +86,8 @@ class BlogsProfileWidget extends StatelessWidget {
             ),
             BlogsWidget(
                 image: this.image,
-                likes: this.likes
+                likes: this.likes,
+              blogtext: this.blogstext,
             ),
           ],
         ),
