@@ -20,7 +20,7 @@ class Constants {
   static Friends testWidget1 = Friends("Abin", 'assets/images/profile_image.png');
   static Friends testWidget2 = Friends("Amit", 'assets/images/Amit.jfif');
   static Friends testWidget3 = Friends("Akshay", 'assets/images/Akshay.jpeg');
-  static Friends testWidget4 = Friends("Rajat", 'assets/images/Rajat.jpeg');
+  static Friends testWidget4 = Friends("Soujanya", 'assets/images/profile_image.png');
   // Strings
   static const String WELCOME = "Welcome";
   static const String LATEST_PICKS = "Latest picks";
