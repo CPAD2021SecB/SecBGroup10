@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:breview/services/googleAuthService.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +14,6 @@ class GoogleSignInPage extends StatefulWidget {
 }
 
 class _GoogleSignInPageState extends State<GoogleSignInPage> {
-  StreamSubscription _streamSubscription;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
